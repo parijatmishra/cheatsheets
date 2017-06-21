@@ -1,0 +1,257 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cheatsheet
+% LaTeX Template
+% Version 1.0 (12/12/15)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Michael Müller (https://github.com/cmichi/latex-template-collection) with
+% extensive modifications by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+% Modified by:
+% parijatmishra
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{scrartcl} % 11pt font size
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage[margin=0pt, landscape]{geometry} % Page margins and orientation
+
+\usepackage{graphicx} % Required for including images
+
+\usepackage{color} % Required for color customization
+\definecolor{mygray}{gray}{.75} % Custom color
+
+\usepackage{url} % Required for the \url command to easily display URLs
+
+\usepackage[ % This block contains information used to annotate the PDF
+colorlinks=false, 
+pdftitle={Cheatsheets}, 
+pdfauthor={Parijat Mishra}, 
+pdfsubject={Compilation of useful shortcuts}, 
+pdfkeywords={Cheatsheet, tmux}
+]{hyperref}
+
+\setlength{\unitlength}{1mm} % Set the length that numerical units are measured in
+\setlength{\parindent}{0pt} % Stop paragraph indentation
+
+\renewcommand{\dots}{\ \dotfill{}\ } % Fills in the right amount of dots
+
+\newcommand{\mytext}[1]{\textsf{\small #1}}
+\newcommand{\command}[2]{#1~\dotfill{}~\mytext{#2}\\} % Custom command for adding a shorcut
+
+\newcommand{\sectiontitle}[1]{\paragraph{#1} \ \\} % Custom command for subsection titles
+
+
+\newcommand{\Kprefix}{\P\ }
+\newcommand{\Kctrl}{$\land$}
+\newcommand{\Kenter}{$\hookleftarrow$}
+\newcommand{\Kalt}{$^{alt}$}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{picture}(297,210) % Create a container for the page content
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\put(10,200){% Position on the page to put the title
+\fbox{\begin{minipage}[t]{85mm} % The size and alignment of the title
+\section*{tmux} % Title
+\end{minipage}}
+}
+
+%----------------------------------------------------------------------------------------
+%	LEGEND SECTION
+%----------------------------------------------------------------------------------------
+
+\put(105,200){% Position on the page to put the legend
+\fbox{\begin{minipage}[t]{180mm} % The size and alignment of the legend
+\Kprefix \mytext{prefix}
+\Kctrl\ \mytext{control}
+\Kenter\ \mytext{enter}
+\Kalt\ \mytext{alt/option}
+\end{minipage}}
+}
+%----------------------------------------------------------------------------------------
+%	FIRST COLUMN SPECIFICATION
+%----------------------------------------------------------------------------------------
+
+\put(10,180){% Divide the page
+\fbox{\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	SESSIONS
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Sessions}
+
+\command{\$ tmux ls}{List}
+\command{\$ tmux}{Create new, numbered}
+\command{\$ tmux new -s \textit{name}}{Create new, named}
+\command{\$ tmux new -A -t \textsl{name}}{Attach to or create session named \textsl{name}}
+\command{\$ tmux a -t \textsl{n}}{Attach to session numbered or named \textsl{n}}
+\command{\$ tmux a}{Attach to first session found}
+\command{\$ tmux kill-session }{Kill all}
+\command{\$ tmux kill-session -t \textsl{n}}{Kill session with name or number \textsl{n}}
+\command{\Kprefix d}{Detach from current}
+
+%----------------------------------------------------------------------------------------
+%	WINDOWS
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Windows}
+
+\command{\Kprefix c}{Create}
+\command{\Kprefix \&}{Kill}
+\command{\Kprefix w}{List}
+\command{\Kprefix $n$}{Go to window $n$ ($n$: 0..9)}
+\command{\Kprefix ,}{Name}
+
+%----------------------------------------------------------------------------------------
+%	PANES
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Panes}
+
+\command{\Kprefix \%}{Split vertically}
+\command{\Kprefix ''}{Split horizontally}
+\command{\Kprefix x}{Kill}
+\command{\Kprefix q, $n$}{Show pane numbers, select pane $n$}
+\command{\Kprefix \{}{Move pane leftwards}
+\command{\Kprefix \}}{Move pane rightwards}
+\command{\Kprefix z}{Zoom current pane in/out}
+
+\sectiontitle{Window $\leftrightarrow$ Pane}
+\command{\Kprefix !}{Move current pane to new window}
+\command{\Kprefix :join-pane -t $W.n$}{\\Move current pane to pane $W.n$, splitting it}
+\command{\Kprefix :join-pane -s $W.n$}{\\Move pane $W.n$ to current pane, splitting it}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage}} % End the first column of text
+} % End the first division of the page
+
+%----------------------------------------------------------------------------------------
+%	SECOND COLUMN SPECIFICATION 
+%----------------------------------------------------------------------------------------
+
+\put(105,180){ % Divide the page
+\fbox{\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	COPY MODE
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Copy mode (vi keys)}
+
+\command{\Kprefix [}{Enter copy mode}
+\command{\Kprefix ]}{Paste selection}
+
+\mytext{Selection in copy mode:}\\
+\command{<space>}{Start selection}
+\command{v}{Toggle rectangle (vertical) mode}
+\command{\Kenter}{Copy selection to clipboard and exit}
+\command{q}{Cancel selection and exit}
+\command{ESC}{Cancel selection, don't exit}
+
+\mytext{Navigation in copy mode:}\\
+\command{h|j|k|l}{Cursor left|down|up|right}
+\command{b}{Previous word}
+\command{w}{Next word start}
+\command{e}{Next word end}
+\command{0}{Start of line}
+\command{\$}{End of line}
+\command{\Kctrl-y}{Scroll up}
+\command{\Kctrl-e}{Scroll down}
+\command{H}{Cursor to top visible line}
+\command{L}{Cursor to last visible line}
+\command{M}{Cursor to middle visible line}
+\command{\Kctrl-b}{Page up}
+\command\Kctrl-u{}{Halfpage up}
+\command\Kctrl-d{}{Halfpage down}
+\command{\Kctrl-f}{Page down}
+\command{g}{First line in buffer/history}
+\command{G}{Last line in buffer}
+
+\mytext{Searching:}\\
+\command{/}{Search downwards}
+\command{?}{Search upwards}
+\command{n}{Jump to next match}
+\command{N}{Jump to next match backwards}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage}} % End the second column of text
+} % End the second division of the page
+
+%----------------------------------------------------------------------------------------
+%	THIRD COLUMN SPECIFICATION 
+%----------------------------------------------------------------------------------------
+
+\put(200,180){ % Divide the page
+\fbox{\begin{minipage}[t]{85mm} % Create a box to house tex
+
+%----------------------------------------------------------------------------------------
+%	Configuration
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Configuration}
+
+\mytext{Configuration file: \texttt{~/.tmux.conf}}
+\\
+\mytext{Use vi keys in copy mode:}\\
+\texttt{setw -g mode-key vi}
+\\
+\mytext{Switch panes using \Kalt-<arrow>:}\\
+\texttt{%
+bind -n M-left select-pane -L\\
+bind -n M-right select-pane -R\\
+bind -n M-Up select-pane -U\\
+bind -n M-Down select-pane -D\\
+}
+\\
+\mytext{Use \P-| and \P-\_ to split panes:}\\
+\texttt{%
+unbind `"`\\
+unbind `\%`\\
+bind | split-window -h\\
+bind \_ split-window -v\\
+}
+%----------------------------------------------------------------------------------------
+%	FOOTNOTE
+%----------------------------------------------------------------------------------------
+
+%\vspace{\baselineskip}
+%\linethickness{0.5mm} % Thickness of the footer line
+%{\color{mygray}\line(1,0){30}} % Print the line with a custom color
+
+%\footnotesize{
+%Created by Parijat Mishra, 2017\\ 
+%\url{http://github.com/parijatmishra/cheatsheets}\\
+%				
+%Released under the MIT license.
+%}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage}} % End the third column of text
+} % End the third division of the page
+\end{picture} % End the container for the entire page
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
