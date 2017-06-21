@@ -1,4 +1,4 @@
-# cheatsheets
+# tmux cheatsheet
 
 A single document, with one landscape size page for one program.
 
