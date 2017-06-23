@@ -25,16 +25,12 @@
 
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
-
+\usepackage{fontspec}
 \usepackage[margin=0pt, landscape]{geometry} % Page margins and orientation
-
 \usepackage{graphicx} % Required for including images
-
 \usepackage{color} % Required for color customization
 \definecolor{mygray}{gray}{.75} % Custom color
-
 \usepackage{url} % Required for the \url command to easily display URLs
-
 \usepackage[ % This block contains information used to annotate the PDF
 colorlinks=false, 
 pdftitle={Cheatsheets}, 
@@ -47,17 +43,12 @@ pdfkeywords={Cheatsheet, tmux}
 \setlength{\parindent}{0pt} % Stop paragraph indentation
 
 \renewcommand{\dots}{\ \dotfill{}\ } % Fills in the right amount of dots
-
-\newcommand{\mytext}[1]{\textsf{\small #1}}
-\newcommand{\command}[2]{#1~\dotfill{}~\mytext{#2}\\} % Custom command for adding a shorcut
-
+\newcommand{\command}[2]{#1~\dotfill{}~#2\\} % Custom command for adding a shorcut
 \newcommand{\sectiontitle}[1]{\paragraph{#1} \ \\} % Custom command for subsection titles
 
-
-\newcommand{\Kprefix}{\P\ }
-\newcommand{\Kctrl}{$\land$}
-\newcommand{\Kenter}{$\hookleftarrow$}
-\newcommand{\Kalt}{$^{alt}$}
+% Use sans-serif everywhere by default
+\renewcommand{\familydefault}{\sfdefault}
+\setsansfont{Gill Sans}
 %----------------------------------------------------------------------------------------
 
 \begin{document}
@@ -69,29 +60,17 @@ pdfkeywords={Cheatsheet, tmux}
 %----------------------------------------------------------------------------------------
 
 \put(10,200){% Position on the page to put the title
-\fbox{\begin{minipage}[t]{85mm} % The size and alignment of the title
+\begin{minipage}[t]{85mm} % The size and alignment of the title
 \section*{tmux} % Title
-\end{minipage}}
+\end{minipage}
 }
 
-%----------------------------------------------------------------------------------------
-%	LEGEND SECTION
-%----------------------------------------------------------------------------------------
-
-\put(105,200){% Position on the page to put the legend
-\fbox{\begin{minipage}[t]{180mm} % The size and alignment of the legend
-\Kprefix \mytext{prefix}
-\Kctrl\ \mytext{control}
-\Kenter\ \mytext{enter}
-\Kalt\ \mytext{alt/option}
-\end{minipage}}
-}
 %----------------------------------------------------------------------------------------
 %	FIRST COLUMN SPECIFICATION
 %----------------------------------------------------------------------------------------
 
 \put(10,180){% Divide the page
-\fbox{\begin{minipage}[t]{85mm} % Create a box to house text
+\begin{minipage}[t]{85mm} % Create a box to house text
 
 %----------------------------------------------------------------------------------------
 %	SESSIONS
@@ -99,15 +78,19 @@ pdfkeywords={Cheatsheet, tmux}
 
 \sectiontitle{Sessions}
 
-\command{\$ tmux ls}{List}
-\command{\$ tmux}{Create new, numbered}
-\command{\$ tmux new -s \textit{name}}{Create new, named}
-\command{\$ tmux new -A -t \textsl{name}}{Attach to or create session named \textsl{name}}
-\command{\$ tmux a -t \textsl{n}}{Attach to session numbered or named \textsl{n}}
-\command{\$ tmux a}{Attach to first session found}
-\command{\$ tmux kill-session }{Kill all}
-\command{\$ tmux kill-session -t \textsl{n}}{Kill session with name or number \textsl{n}}
-\command{\Kprefix d}{Detach from current}
+Command prompt:
+
+\command{tmux ls}{List}
+\command{tmux}{Create new}
+\command{tmux new -s $n$}{Create new, named $n$}
+\command{tmux a -d -t $n$}{Attach to $n$, detach other clients}
+\command{tmux a}{Attach to first found}
+\command{tmux kill-session}{Kill all/current}
+\command{tmux kill-session -t $n$}{Kill named/numbered $n$}
+
+Inside tmux:
+
+\command{C-a\  d}{Detach from current}
 
 %----------------------------------------------------------------------------------------
 %	WINDOWS
@@ -115,11 +98,11 @@ pdfkeywords={Cheatsheet, tmux}
 
 \sectiontitle{Windows}
 
-\command{\Kprefix c}{Create}
-\command{\Kprefix \&}{Kill}
-\command{\Kprefix w}{List}
-\command{\Kprefix $n$}{Go to window $n$ ($n$: 0..9)}
-\command{\Kprefix ,}{Name}
+\command{C-a\ c}{Create}
+\command{C-a\ \&}{Kill}
+\command{C-a\ w}{List}
+\command{C-a\ $n$}{Go to window $n$ ($n$: 0..9)}
+\command{C-a\ ,}{Name}
 
 %----------------------------------------------------------------------------------------
 %	PANES
@@ -127,22 +110,21 @@ pdfkeywords={Cheatsheet, tmux}
 
 \sectiontitle{Panes}
 
-\command{\Kprefix \%}{Split vertically}
-\command{\Kprefix ''}{Split horizontally}
-\command{\Kprefix x}{Kill}
-\command{\Kprefix q, $n$}{Show pane numbers, select pane $n$}
-\command{\Kprefix \{}{Move pane leftwards}
-\command{\Kprefix \}}{Move pane rightwards}
-\command{\Kprefix z}{Zoom current pane in/out}
+\command{C-a\ |}{Split vertically}
+\command{C-a\ \-}{Split horizontally}
+\command{C-a\ x}{Kill}
+\command{C-a\ q, $n$}{Show pane numbers, select $n$}
+\command{C-a\ z}{Zoom current pane in/out}
 
 \sectiontitle{Window $\leftrightarrow$ Pane}
-\command{\Kprefix !}{Move current pane to new window}
-\command{\Kprefix :join-pane -t $W.n$}{\\Move current pane to pane $W.n$, splitting it}
-\command{\Kprefix :join-pane -s $W.n$}{\\Move pane $W.n$ to current pane, splitting it}
+
+\command{C-a\  !}{Move current pane to new window}
+\command{C-a\  :join-pane -t $W.n$}{\\Move current pane to pane $W.n$, splitting it}
+\command{C-a\  :join-pane -s $W.n$}{\\Move pane $W.n$ to current pane, splitting it}
 
 %----------------------------------------------------------------------------------------
 
-\end{minipage}} % End the first column of text
+\end{minipage} % End the first column of text
 } % End the first division of the page
 
 %----------------------------------------------------------------------------------------
@@ -150,7 +132,7 @@ pdfkeywords={Cheatsheet, tmux}
 %----------------------------------------------------------------------------------------
 
 \put(105,180){ % Divide the page
-\fbox{\begin{minipage}[t]{85mm} % Create a box to house text
+\begin{minipage}[t]{85mm} % Create a box to house text
 
 %----------------------------------------------------------------------------------------
 %	COPY MODE
@@ -158,36 +140,33 @@ pdfkeywords={Cheatsheet, tmux}
 
 \sectiontitle{Copy mode (vi keys)}
 
-\command{\Kprefix [}{Enter copy mode}
-\command{\Kprefix ]}{Paste selection}
+\command{C-a\ [}{Enter copy mode}
+\command{C-a\ ]}{Paste selection}
 
-\mytext{Selection in copy mode:}\\
-\command{<space>}{Start selection}
+\command{SPC}{Start selection}
 \command{v}{Toggle rectangle (vertical) mode}
-\command{\Kenter}{Copy selection to clipboard and exit}
+\command{ENTER}{Copy selection to clipboard and exit}
 \command{q}{Cancel selection and exit}
 \command{ESC}{Cancel selection, don't exit}
 
-\mytext{Navigation in copy mode:}\\
 \command{h|j|k|l}{Cursor left|down|up|right}
 \command{b}{Previous word}
 \command{w}{Next word start}
 \command{e}{Next word end}
 \command{0}{Start of line}
 \command{\$}{End of line}
-\command{\Kctrl-y}{Scroll up}
-\command{\Kctrl-e}{Scroll down}
+\command{C-y}{Scroll up}
+\command{C-e}{Scroll down}
 \command{H}{Cursor to top visible line}
 \command{L}{Cursor to last visible line}
 \command{M}{Cursor to middle visible line}
-\command{\Kctrl-b}{Page up}
-\command\Kctrl-u{}{Halfpage up}
-\command\Kctrl-d{}{Halfpage down}
-\command{\Kctrl-f}{Page down}
+\command{C-b}{Page up}
+\command{C-u}{Halfpage up}
+\command{C-d}{Halfpage down}
+\command{C-f}{Page down}
 \command{g}{First line in buffer/history}
 \command{G}{Last line in buffer}
 
-\mytext{Searching:}\\
 \command{/}{Search downwards}
 \command{?}{Search upwards}
 \command{n}{Jump to next match}
@@ -195,7 +174,7 @@ pdfkeywords={Cheatsheet, tmux}
 
 %----------------------------------------------------------------------------------------
 
-\end{minipage}} % End the second column of text
+\end{minipage} % End the second column of text
 } % End the second division of the page
 
 %----------------------------------------------------------------------------------------
@@ -203,7 +182,7 @@ pdfkeywords={Cheatsheet, tmux}
 %----------------------------------------------------------------------------------------
 
 \put(200,180){ % Divide the page
-\fbox{\begin{minipage}[t]{85mm} % Create a box to house tex
+\begin{minipage}[t]{85mm} % Create a box to house tex
 
 %----------------------------------------------------------------------------------------
 %	Configuration
@@ -211,20 +190,23 @@ pdfkeywords={Cheatsheet, tmux}
 
 \sectiontitle{Configuration}
 
-\mytext{Configuration file: \texttt{~/.tmux.conf}}
-\\
-\mytext{Use vi keys in copy mode:}\\
+Configuration file: \texttt{~/.tmux.conf}
+
+Use vi keys in copy mode:
+
 \texttt{setw -g mode-key vi}
-\\
-\mytext{Switch panes using \Kalt-<arrow>:}\\
+
+Switch panes using M-<arrow>:
+
 \texttt{%
 bind -n M-left select-pane -L\\
 bind -n M-right select-pane -R\\
 bind -n M-Up select-pane -U\\
 bind -n M-Down select-pane -D\\
 }
-\\
-\mytext{Use \P-| and \P-\_ to split panes:}\\
+
+Use 'C-a |' and 'C-a \_' to split panes:
+
 \texttt{%
 unbind `"`\\
 unbind `\%`\\
@@ -248,7 +230,7 @@ bind \_ split-window -v\\
 
 %----------------------------------------------------------------------------------------
 
-\end{minipage}} % End the third column of text
+\end{minipage} % End the third column of text
 } % End the third division of the page
 \end{picture} % End the container for the entire page
 
