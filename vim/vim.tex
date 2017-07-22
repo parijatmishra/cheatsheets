@@ -1,0 +1,365 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cheatsheet
+% LaTeX Template
+% Version 1.0 (12/12/15)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Michael Müller (https://github.com/cmichi/latex-template-collection) with
+% extensive modifications by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+% Modified by:
+% parijatmishra
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt]{scrartcl} % 11pt font size
+
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{fontspec}
+\usepackage[margin=0pt, landscape]{geometry} % Page margins and orientation
+\usepackage{graphicx} % Required for including images
+\usepackage{color} % Required for color customization
+\definecolor{mygray}{gray}{.75} % Custom color
+\usepackage{url} % Required for the \url command to easily display URLs
+\usepackage[ % This block contains information used to annotate the PDF
+colorlinks=false, 
+pdftitle={Cheatsheets}, 
+pdfauthor={Parijat Mishra}, 
+pdfsubject={Compilation of useful shortcuts}, 
+pdfkeywords={Cheatsheet, tmux}
+]{hyperref}
+
+\setlength{\unitlength}{1mm} % Set the length that numerical units are measured in
+\setlength{\parindent}{0pt} % Stop paragraph indentation
+
+\renewcommand{\dots}{\ \dotfill{}\ } % Fills in the right amount of dots
+\newcommand{\command}[2]{\texttt{#1}~\dotfill{}~#2\\} % Custom command for adding a shorcut
+\newcommand{\sectiontitle}[1]{\paragraph{#1} \ \\} % Custom command for subsection titles
+
+% Use sans-serif everywhere by default
+\renewcommand{\familydefault}{\sfdefault}
+\setsansfont{Gill Sans}
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{picture}(297,210) % Create a container for the page content
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\put(10,200){% Position on the page to put the title
+\begin{minipage}[t]{85mm} % The size and alignment of the title
+\section*{vim} % Title
+\end{minipage}
+}
+
+%----------------------------------------------------------------------------------------
+%	LEGEND SECTION
+%----------------------------------------------------------------------------------------
+
+\put(105,200){% Position on the page to put the legend
+\begin{minipage}[t]{180mm} % The size and alignment of the legend
+\end{minipage}
+}
+%----------------------------------------------------------------------------------------
+%	FIRST COLUMN SPECIFICATION
+%----------------------------------------------------------------------------------------
+
+\put(10,180){% Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	Basics
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Basics}
+\command{ESC}{Enter normal mode (exiting current mode/command)}
+\command{:w}{Save (don't exit)}
+\command{:w !sudo tee \%}{Save using sudo}
+\command{:saveas \textsl{file}}{Save as}
+\command{:q}{Quit}
+\command{:q!}{Quit discarding changes}
+\command{:wq $|$ :x}{Save and exit}
+\command{$n$<command>}{Repeat command $n$ times}
+\command{u}{Undo}
+\command{C-r}{Redo}
+
+%----------------------------------------------------------------------------------------
+%	Movement
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Movement}
+\command{h $|$ j $|$ k $|$ l}{Move one char left $|$ up $|$ down $|$ right}
+\command{w $|$ e}{Jump forward to start $|$ end of word}
+\command{W $|$ E}{Jump forward to start $|$ end of word+punct}
+\command{b}{Jump backward to start of word}
+\command{0 $|$ \$}{Jump to start $|$ end of line}
+\command{$\land$ $|$ g\_}{Jump to first $|$ last non-blank char in line}
+
+\command{\%}{Jump to matching char of pair '()' $|$ '\{\}' $|$ '[]'}
+\command{\} $|$ \{}{Jump to next $|$ previous para/function/block}
+
+\command{H $|$ M $|$ L}{Move to top $|$ middle $|$ bottom of screen}
+\command{C-f $|$ C-b}{Move down $|$ up one screen}
+\command{C-d $|$ C-u}{Move down $|$ up half screen}
+\command{zz}{Center cursor on screen}
+\command{gg $|$ G}{Move to first $|$ last line of document}
+\command{$n$G}{Jump to line $n$}
+
+%----------------------------------------------------------------------------------------
+% INSERT MODE	
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Enter/exit Insert mode}
+\command{i $|$ a}{Start inserting, before $|$ after cursor}
+\command{I $|$ A}{Start inserting, start $|$ end of line}
+\command{o $|$ O}{Start inserting, below $|$ above current line}
+\command{ESC}{Exit insert mode (enter normal mode)}
+
+%----------------------------------------------------------------------------------------
+\end{minipage} % End the first column of text
+} % End the first division of the page
+
+%----------------------------------------------------------------------------------------
+%	SECOND COLUMN SPECIFICATION 
+%----------------------------------------------------------------------------------------
+
+\put(105,180){% Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	Insert mode commands
+%----------------------------------------------------------------------------------------
+
+\emph{In insert mode:}\\
+\command{C-h $|$ C-w $|$ C-u}{Del backwards char$|$word$|$line}
+\command{C-k}{Delete forwards line}
+\command{C-r 0}{Paste last `y'anked}
+\command{C-r C-p 0}{Paste last `y'anked, indenting}
+\command{C-n $|$ C-p}{Start auto-complete (C-n/C-p scrolls)}
+
+%----------------------------------------------------------------------------------------
+%	Editing
+%----------------------------------------------------------------------------------------
+\sectiontitle{Editing}
+\command{r$x$}{Replace current (single) char with $x$}
+\command{s}{Delete char + insert mode}
+\command{S $|$ cc}{Delete line + insert mode}
+\command{cw}{Delete to end-of-word + insert mode}
+\command{c\$}{Delete to end-of-line + insert mode}
+
+\command{J}{Join line below to current}
+\command{R}{Start replacing (enter replace mode)}
+\command{ESC}{Exit replace mode (enter normal mode)}
+
+%----------------------------------------------------------------------------------------
+%	Cut/Copy/Paste
+%----------------------------------------------------------------------------------------
+\sectiontitle{Cut/Copy/Paste}
+\command{yy $|$ Y}{Copy (`yank') a line}
+\command{yw}{Copy from char to end-of-word}
+\command{y\$}{Copy from char to end-of-line}
+\command{yb}{Copy before char to start-of-word}
+\command{y0}{Copy before char to start-of-line}
+
+\command{x}{Cut one char}
+\command{dw}{Cut to end-of-word}
+\command{d\$ $|$ D}{Cut to end-of-line}
+\command{dd}{Cut entire line}
+\command{db}{Cut to start-of-word}
+\command{d0}{Cut to start-of-line}
+
+\command{p $|$ P}{Paste clipboard after $|$ before cursor}
+\command{xp}{Transpose chars}
+
+%----------------------------------------------------------------------------------------
+\end{minipage} % End the second column of text
+} % End the second division of the page
+
+%----------------------------------------------------------------------------------------
+%	THIRD COLUMN SPECIFICATION 
+%----------------------------------------------------------------------------------------
+
+\put(200,180){% Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house tex
+
+%----------------------------------------------------------------------------------------
+%	VISUAL MODE
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Visual Mode}
+\command{v}{Start visual mode, mark chars}
+\command{C-v}{Start visual BLOCK mode, mark block}
+\command{gv}{Visual select last paste}
+\emph{In visual mode:}\\
+\command{o}{Jump to other end of marked area}
+\command{O}{Move horizintally to other corner of block}
+\command{aw}{Mark word}
+\command{ab $|$ aB}{Mark block with `()'$|$'\{\}'}
+\command{ib $|$ iB}{Mark inner block with `()'$|$`\{\}'}
+\command{< $|$ >}{Shift marked left$|$right by \texttt{shiftwidth}}
+\command{y $|$ d}{Copy $|$ Cut marked}
+
+%----------------------------------------------------------------------------------------
+%	SEARCH AND REPLACE
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Search and Replace}
+\command{/\textsl{pattern}}{Search forwards for \textsl{pattern}}
+\command{?\textsl{pattern}}{Search backwards for \textsl{pattern}}
+\command{n $|$ N}{Repeat search in same$|$reverse direction}
+\command{:\%s/\textsl{old}/\textsl{new}/g}{Replace \textsl{old} with \textsl{new} (g)lobally}
+\command{:noh}{(Noh)ighlighting of search matches}
+\command{\#}{Search backwards word under cursor}
+
+%----------------------------------------------------------------------------------------
+%	MACROS
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Macros}
+\command{@$x$}{Run macro $x$}
+\command{@@}{Re-run last run macro}
+\command{q$x$}{Start recording macro named $x$}
+\command{q}{Stop recording}
+
+%----------------------------------------------------------------------------------------
+%	REGISTERS
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Registers}
+\command{\"$x$p}{Paste contents of register $x$}
+\command{\"$x$<yank-command>}{Yank into register $x$}
+\command{:reg}{Show contents of registers}
+
+\emph{Register $0$ contains the value of the last yank command.}
+
+%----------------------------------------------------------------------------------------
+%	FOOTNOTE
+%----------------------------------------------------------------------------------------
+
+%\vspace{\baselineskip}
+%\linethickness{0.5mm} % Thickness of the footer line
+%{\color{mygray}\line(1,0){30}} % Print the line with a custom color
+
+%\footnotesize{
+%Created by Parijat Mishra, 2017\\ 
+%\url{http://github.com/parijatmishra/cheatsheets}\\
+%				
+%Released under the MIT license.
+%}
+
+%----------------------------------------------------------------------------------------
+
+\end{minipage} % End the third column of text
+} % End the third division of the page
+\end{picture} % End the container for the entire page
+
+%----------------------------------------------------------------------------------------
+% SECOND PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{picture}(297,210) % Create a container for the page content
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\put(10,200){% Position on the page to put the title
+\begin{minipage}[t]{85mm} % The size and alignment of the title
+\section*{vim} % Title
+\end{minipage}
+}
+
+%----------------------------------------------------------------------------------------
+%	LEGEND SECTION
+%----------------------------------------------------------------------------------------
+
+\put(105,200){% Position on the page to put the legend
+\begin{minipage}[t]{180mm} % The size and alignment of the legend
+\end{minipage}
+}
+
+%----------------------------------------------------------------------------------------
+%	FIRST COLUMN SPECIFICATION
+%----------------------------------------------------------------------------------------
+
+\put(10,180){% Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+%	WINDOWS
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Windows}
+\command{:split}{Split window horizontally}
+\command{:vsplit}{Split window vertically}
+\command{:split \textsl{filename}}{Split horizontally, load \textsl{filename}}
+\command{:vsplit \textsl{filename}}{Like \texttt{:split} but vertically}
+\command{:close}{Close current window}
+\command{:only}{Keep only this window open}
+\command{C-h$|$j$|$k$|$l}{Move to left$|$up$|$down$|$right window}
+\command{C-w =}{Make all windows equal size}
+\command{$n$ C-w +}{Increase size of window by $n$ lines}
+
+%----------------------------------------------------------------------------------------
+%	BUFFERS
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Buffers}
+\command{:ls}{List all buffers}
+\command{:b $n$}{Open buffer $n$ in this window}
+\command{:sb $n$}{Split, open buffer $n$ in this window}
+\command{:bf$|$:bn$|$:bp}{Open first$|$next$|$previous buffer}
+
+%----------------------------------------------------------------------------------------
+%   REFORMATTING
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{Reformatting}
+\command{V<movement>=}{Visual select, reformat selected}
+\command{==}{Reformat current line}
+\command{gqap}{Reformat paragraph}
+\command{:set textwidth}{For reformat, margin to wrap lines}
+
+%----------------------------------------------------------------------------------------
+\end{minipage} % End the first column of text
+}
+
+%----------------------------------------------------------------------------------------
+%	SECOND COLUMN SPECIFICATION
+%----------------------------------------------------------------------------------------
+
+\put(105,180){% Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+\end{minipage} % End the second column of text
+}
+
+%----------------------------------------------------------------------------------------
+%	THIRD COLUMN SPECIFICATION
+%----------------------------------------------------------------------------------------
+
+\put(200,180){% Divide the page
+\begin{minipage}[t]{85mm} % Create a box to house text
+
+%----------------------------------------------------------------------------------------
+\end{minipage} % End the third column of text
+}
+
+
+\end{picture} % End the container for the entire page
+
+\end{document}
