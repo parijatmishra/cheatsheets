@@ -344,7 +344,47 @@ pdfkeywords={Cheatsheet, tmux}
 \put(105,180){% Divide the page
 \begin{minipage}[t]{85mm} % Create a box to house text
 
+
 %----------------------------------------------------------------------------------------
+%   ORG MODE
+%----------------------------------------------------------------------------------------
+\sectiontitle{Org Mode}
+\emph{Show/Hide:}\\
+\command{<TAB>}{Cycle visibility, in subtree}
+\command{zm}{Collapse headings one level, globaly}
+\command{zr}{Expand headings one level, globally}
+
+\command{\}}{Next heading}
+\command{]]}{Next heading, same level}
+\command{g\}}{Next heading, higher level}
+\command{\}}{Previous heading}
+\command{[[}{Previous heading, same level}
+\command{g\{}{Previous heading, higher level}
+
+\emph{Headings:}\\
+\command{<CR>|\textbackslash{}hn}{New heading, below, after children}
+\command{\textbackslash{}hN}{New heading, above (Not below)}
+\command{\textbackslash{}hh}{(hijack) New heading, below, taking over children}
+
+\command{m]]}{Move subtree down}
+\command{m[[}{Move subtree up}
+\command{>>}{Demote heading}
+\command{<<}{Promote heading}
+\command{>ar}{Demote subtree}
+\command{<ar}{Promote subtree}
+
+\command{dar}{Delete subtree}
+\command{dah}{Delete heading}
+\command{p}{Paste}
+
+\emph{TODO lists:}\\
+\command{S-left|S-right}{Cycle keyword (for current heading)}
+
+\emph{Checkboxes:}\\
+\command{\textbackslash{}cn}{Insert checkbox, below}
+\command{\textbackslash{}cN}{Insert checkbox, above (Not below)}
+\command{\textbackslash{}cc}{Toggle status}
+
 \end{minipage} % End the second column of text
 }
 
