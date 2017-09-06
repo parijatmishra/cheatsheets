@@ -321,7 +321,6 @@ pdfkeywords={Cheatsheet, tmux}
 \command{:ls}{List all buffers}
 \command{:b $n$}{Open buffer $n$ in this window}
 \command{:sb $n$}{Split, open buffer $n$ in this window}
-\command{:bf$|$:bn$|$:bp}{Open first$|$next$|$previous buffer}
 
 %----------------------------------------------------------------------------------------
 %   REFORMATTING
@@ -332,6 +331,25 @@ pdfkeywords={Cheatsheet, tmux}
 \command{==}{Reformat current line}
 \command{gqap}{Reformat paragraph}
 \command{:set textwidth}{For reformat, margin to wrap lines}
+
+%----------------------------------------------------------------------------------------
+%   NERDTree
+%----------------------------------------------------------------------------------------
+
+\sectiontitle{NERDTree}
+\command{<leader><C-n>}{:NERDTreeToggle}
+\command{o}{(File) Open node}
+\command{go}{Preview node in current pane}
+\command{i | s}{Open node in horizontal|vertical split}
+\command{gi | gs}{Preview node in horizontal|vertical split}
+\command{o}{(Directory) Open/Close node}
+\command{x}{Collapse parent node}
+\command{p}{Go to parent}
+\command{P}{Go to root}
+\command{C}{Change root to current dir}
+\command{u}{Move tree root up a dir}
+\command{cd}{Change CWD to selected dir}
+\command{CD}{Change root to CWD}
 
 %----------------------------------------------------------------------------------------
 \end{minipage} % End the first column of text
