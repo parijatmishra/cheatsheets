@@ -239,8 +239,8 @@ pdfkeywords={Cheatsheet, tmux}
 %----------------------------------------------------------------------------------------
 
 \sectiontitle{Registers}
-\command{\"$x$p}{Paste contents of register $x$}
-\command{\"$x$<yank-command>}{Yank into register $x$}
+\command{"$x$p}{Paste contents of register $x$}
+\command{"$x$<yank-command>}{Yank into register $x$}
 \command{:reg}{Show contents of registers}
 
 \emph{Register $0$ contains the value of the last yank command.}
@@ -333,23 +333,23 @@ pdfkeywords={Cheatsheet, tmux}
 \command{:set textwidth}{For reformat, margin to wrap lines}
 
 %----------------------------------------------------------------------------------------
-%   NERDTree
+%   netrw
 %----------------------------------------------------------------------------------------
 
-\sectiontitle{NERDTree}
-\command{<leader><C-n>}{:NERDTreeToggle}
-\command{o}{(File) Open node}
-\command{go}{Preview node in current pane}
-\command{i | s}{Open node in horizontal|vertical split}
-\command{gi | gs}{Preview node in horizontal|vertical split}
-\command{o}{(Directory) Open/Close node}
-\command{x}{Collapse parent node}
-\command{p}{Go to parent}
-\command{P}{Go to root}
-\command{C}{Change root to current dir}
-\command{u}{Move tree root up a dir}
-\command{cd}{Change CWD to selected dir}
-\command{CD}{Change root to CWD}
+\sectiontitle{netrw}
+\command{:Explore}{Explore directory of current file}
+\command{:Vexplore}{Explore directory in vertical split}
+\command{I}{Toggle banner}
+\command{i}{Cycle directory listing mode}
+\command{gn}{Go i(n)to the directory under the cursor}
+\command{-}{(Go up a directory}
+\command{<CR>}{Expand/Collapse a directory, open a file}
+\command{o|v}{Open file in horiz|vert split}
+\command{c}{Make this the current directory}
+\command{d}{Create directory}
+\command{\%}{Create file}
+\command{<DEL>|D}{Delete file/directory}
+\command{R}{Rename file/directory}
 
 %----------------------------------------------------------------------------------------
 \end{minipage} % End the first column of text
