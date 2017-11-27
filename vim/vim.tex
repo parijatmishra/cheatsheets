@@ -87,7 +87,7 @@ pdfkeywords={Cheatsheet, tmux}
 \sectiontitle{Basics}
 \command{ESC}{Enter normal mode (exiting current mode/command)}
 \command{:w}{Save (don't exit)}
-\command{:w !sudo tee \%}{Save using sudo}
+\command{:w\ {}!sudo tee \%}{Save using sudo}
 \command{:saveas \textsl{file}}{Save as}
 \command{:q}{Quit}
 \command{:q!}{Quit discarding changes}
@@ -146,6 +146,7 @@ pdfkeywords={Cheatsheet, tmux}
 \emph{In insert mode:}\\
 \command{C-h $|$ C-w $|$ C-u}{Del backwards char$|$word$|$line}
 \command{C-k}{Delete forwards line}
+\command{C-t $|$ C-d}{Tab $|$ de-tab current line}
 \command{C-r 0}{Paste last `y'anked}
 \command{C-r C-p 0}{Paste last `y'anked, indenting}
 \command{C-n $|$ C-p}{Start auto-complete (C-n/C-p scrolls)}

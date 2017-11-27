@@ -111,14 +111,14 @@ Inside tmux:
 \sectiontitle{Panes}
 
 \command{C-a\ |}{Split vertically}
-\command{C-a\ \-}{Split horizontally}
+\command{C-a\ -}{Split horizontally}
 \command{C-a\ x}{Kill}
 \command{C-a\ q, $n$}{Show pane numbers, select $n$}
 \command{C-a\ z}{Zoom current pane in/out}
 
 \sectiontitle{Window $\leftrightarrow$ Pane}
 
-\command{C-a\  !}{Move current pane to new window}
+\command{C-a\  {}!}{Move current pane to new window}
 \command{C-a\  :join-pane -t $W.n$}{\\Move current pane to pane $W.n$, splitting it}
 \command{C-a\  :join-pane -s $W.n$}{\\Move pane $W.n$ to current pane, splitting it}
 
@@ -181,7 +181,7 @@ Inside tmux:
 %	THIRD COLUMN SPECIFICATION 
 %----------------------------------------------------------------------------------------
 
-\put(200,180){ % Divide the page
+\put(200,180){% Divide the page
 \begin{minipage}[t]{85mm} % Create a box to house tex
 
 %----------------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ bind -n M-Up select-pane -U\\
 bind -n M-Down select-pane -D\\
 }
 
-Use 'C-a |' and 'C-a \_' to split panes:
+Use `C-a |' and `C-a \_' to split panes:
 
 \texttt{%
 unbind `"`\\
